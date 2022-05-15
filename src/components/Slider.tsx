@@ -7,9 +7,21 @@ import React, {useState} from 'react';
     const [active, setActive] = useState(1);
 
     const data = [
-      {text: "One"},
-      {text: "Two"},
-      {text: "Three"}
+      {
+        caption: "One",
+        imgUrl: "https://picsum.photos/400/200",
+        altText: 'alt'
+      },
+      {
+        caption: "Two",
+        imgUrl: "https://picsum.photos/300/100",
+        altText: 'alt'
+      },
+      {
+        caption: "Three",
+        imgUrl: "https://picsum.photos/200/200",
+        altText: 'alt'
+      }
     ]
 
 
@@ -20,21 +32,27 @@ import React, {useState} from 'react';
     const nextSlide = (event: React.MouseEvent<HTMLButtonElement>) => {
       active !==data.length -1 && setActive(active + 1)
     }
-    
+
+    const changeActiveIndicator = (event: React.MouseEvent<HTMLButtonElement>) => {
+      setActive(Number(event.currentTarget.getAttribute("data-index")))
+    }
+
       return (
         <div className='slider'>
             <div className='inner' style={{transform: `translateX(${active * -100}%)`}}>
               {data.map((item, index)=>{
-                return <SliderItem key={index} text={item.text}/>
+                return <SliderItem key={index} imgUrl={item.imgUrl} altText={item.altText} caption={item.caption}/>
               })}
             </div>
-            <button onClick={prevSlide}>Prev</button>
-            <div className='indicators'>
-              {data.map((item, index)=>{
-                return <div>{index + 1}</div>
-              })}
+            <div className='controls'>
+              <button className='change-slide' onClick={prevSlide}>Prev</button>
+              <div className='indicators'>
+                {data.map((item, index)=>{
+                  return <button key={index} data-index={index} onClick={changeActiveIndicator}className={active == index ? 'indicator active': 'indicator'}>{index + 1}</button>
+                })}
+              </div>
+              <button className='change-slide' onClick={nextSlide}>Next</button>
             </div>
-            <button onClick={nextSlide}>Next</button>
         </div>
       );
     }
