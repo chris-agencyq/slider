@@ -1,10 +1,11 @@
 import '../../src/styles/slider.scss';
 import SliderItem from './SliderItem';
 import Button from './Button';
+import Indicator from './Indicator';
 import React, {useState} from 'react';
   
   const Slider = () => {
-    const [active, setActive] = useState(1);
+    const [active, setActive] = useState(0);
 
     const data = [
       {
@@ -30,7 +31,7 @@ import React, {useState} from 'react';
     }
 
     const nextSlide = (event: React.MouseEvent<HTMLButtonElement>) => {
-      active !==data.length -1 && setActive(active + 1)
+      active !== data.length -1 && setActive(active + 1)
     }
 
     const changeActiveIndicator = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -45,13 +46,13 @@ import React, {useState} from 'react';
               })}
             </div>
             <div className='controls'>
-              <button className='change-slide' onClick={prevSlide}>Prev</button>
+            <Button onClick={prevSlide} text={'PREV'}/>
               <div className='indicators'>
                 {data.map((item, index)=>{
-                  return <button key={index} data-index={index} onClick={changeActiveIndicator}className={active == index ? 'indicator active': 'indicator'}>{index + 1}</button>
+                  return <Indicator key={index} active={active} index={index} label={index + 1} onClick={changeActiveIndicator}/>
                 })}
               </div>
-              <button className='change-slide' onClick={nextSlide}>Next</button>
+              <Button onClick={nextSlide} text={'NEXT'}/>
             </div>
         </div>
       );

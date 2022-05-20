@@ -1,14 +1,13 @@
 type itemProps = {
-    caption: string,
-    imgUrl: string,
-    altText: string 
+    caption: string | null,
+    imgUrl: string | null,
+    altText: string | null 
   }
 
-const SliderItem = (props: itemProps) => {
-    const {caption, imgUrl, altText} = props
+const SliderItem = ({caption, imgUrl, altText}: itemProps) => {
     return(
         <div className="item">
-            <img src={imgUrl} alt={altText} />
+            {imgUrl && <img src={imgUrl} alt={altText?? ""} />}
         </div>
     )
 }

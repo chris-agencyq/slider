@@ -1,11 +1,13 @@
 type buttonProps = {
-    text: string,
+    text: string | null,
+    onClick?: React.MouseEventHandler
   }
 
 const SliderItem = (props: buttonProps) => {
-    const {text} = props
+    const {text, onClick} = props
+
     return(
-        <button>{text}</button>
+        <button className="change-slide" onClick={onClick}>{text}</button>
     )
 }
 
