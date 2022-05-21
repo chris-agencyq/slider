@@ -1,0 +1,13 @@
+.indicators{
+    display: flex;
+    flex-direction: row;
+
+    .indicator {
+        cursor: pointer;
+        margin: 0 .5rem;
+    }
+
+    .active {
+        background-color: green;
+    }
+}

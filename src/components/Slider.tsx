@@ -2,10 +2,16 @@ import '../../src/styles/slider.scss';
 import SliderItem from './SliderItem';
 import Button from './Button';
 import Indicator from './Indicator';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import useMediaQuery from '../hooks/useMediaQuery';
   
   const Slider = () => {
     const [active, setActive] = useState(0);
+
+
+    // useEffect(()=>{
+    //   console.log(isMobile)
+    // })
 
     const data = [
       {
@@ -22,8 +28,46 @@ import React, {useState} from 'react';
         caption: "Three",
         imgUrl: "https://picsum.photos/200/200",
         altText: 'alt'
+      },
+      {
+        caption: "One",
+        imgUrl: "https://picsum.photos/400/200",
+        altText: 'alt'
+      },
+      {
+        caption: "Two",
+        imgUrl: "https://picsum.photos/300/100",
+        altText: 'alt'
+      },
+      {
+        caption: "Three",
+        imgUrl: "https://picsum.photos/200/200",
+        altText: 'alt'
+      },
+      {
+        caption: "One",
+        imgUrl: "https://picsum.photos/400/200",
+        altText: 'alt'
+      },
+      {
+        caption: "Two",
+        imgUrl: "https://picsum.photos/300/100",
+        altText: 'alt'
+      },
+      {
+        caption: "Three",
+        imgUrl: "https://picsum.photos/200/200",
+        altText: 'alt'
       }
     ]
+
+    const settings = {
+      mobile: 1,
+      tablet: 2,
+      desktop: 4,
+      aspectRatio: .66,
+      gutter: 1.5
+    }
 
 
     const prevSlide = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -42,7 +86,7 @@ import React, {useState} from 'react';
         <div className='slider'>
             <div className='inner' style={{transform: `translateX(${active * -100}%)`}}>
               {data.map((item, index)=>{
-                return <SliderItem key={index} imgUrl={item.imgUrl} altText={item.altText} caption={item.caption}/>
+                return <SliderItem key={index} imgUrl={item.imgUrl} altText={item.altText} caption={item.caption} settings={settings}/>
               })}
             </div>
             <div className='controls'>

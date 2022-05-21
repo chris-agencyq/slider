@@ -19,6 +19,13 @@ function App() {
       }
     ]
   }
+
+  
+  const settings = {
+    mobile: 1,
+    tablet: 2,
+    desktop: 4
+  }
   
   return (
     <div className="App">
