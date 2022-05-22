@@ -6,12 +6,6 @@ import React, {useState, useEffect} from 'react';
 import useMediaQuery from '../hooks/useMediaQuery';
   
   const Slider = () => {
-    const [active, setActive] = useState(0);
-
-
-    // useEffect(()=>{
-    //   console.log(isMobile)
-    // })
 
     const data = [
       {
@@ -61,12 +55,45 @@ import useMediaQuery from '../hooks/useMediaQuery';
       }
     ]
 
+    const [active, setActive] = useState(0);
+    const [numberOfSlides, setNumberOfSlides] = useState(1);
+    const minTablet = useMediaQuery('(min-width: 768px)');
+    const isDesktop = useMediaQuery('(min-width: 992px)');
+    const isMobile = !minTablet;
+    const isTablet = minTablet && !isDesktop;
+
+
+    
     const settings = {
       mobile: 1,
       tablet: 2,
       desktop: 4,
       aspectRatio: .66,
       gutter: 1.5
+    }
+
+    useEffect(()=>{
+      setNumberOfSlides(numOfSlides())
+    }, [isTablet, isMobile, isDesktop, minTablet])
+
+    
+    const numOfSlides = () => {
+      if(isDesktop) {
+        return settings.desktop
+      }
+      else if(isTablet) {
+        return settings.tablet
+      }
+      else {
+        return settings.mobile
+      }
+    }
+
+     
+    const pagination = () => {
+      const numberOfIndicators = Math.ceil(data.length/numberOfSlides);
+      const arr = Array(numberOfIndicators).fill('el');
+      return arr;
     }
 
 
@@ -92,7 +119,7 @@ import useMediaQuery from '../hooks/useMediaQuery';
             <div className='controls'>
             <Button onClick={prevSlide} text={'PREV'}/>
               <div className='indicators'>
-                {data.map((item, index)=>{
+                {pagination().map((item, index)=>{
                   return <Indicator key={index} active={active} index={index} label={index + 1} onClick={changeActiveIndicator}/>
                 })}
               </div>
