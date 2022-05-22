@@ -113,7 +113,7 @@ import useMediaQuery from '../hooks/useMediaQuery';
         <div className='slider'>
             <div className='inner' style={{transform: `translateX(${active * -100}%)`}}>
               {data.map((item, index)=>{
-                return <SliderItem key={index} imgUrl={item.imgUrl} altText={item.altText} caption={item.caption} settings={settings}/>
+                return <SliderItem key={index} numberOfSlides={numberOfSlides} caption={item.caption} imgUrl={item.imgUrl} altText={item.altText} settings={settings}/>
               })}
             </div>
             <div className='controls'>
